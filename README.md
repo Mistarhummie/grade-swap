@@ -12,6 +12,9 @@ GradeSwap is a Kenyan marketplace for used school books, like Jiji but only for 
 | **Book** (`#/book/<id>`) | Photos, price, details, and a **Request to buy** form (name, M-Pesa number, area) |
 | **Sell** (`#/sell`) | Google sign-in, then list a book with up to 4 photos (resized on the phone before upload) |
 | **My listings** (`#/my`) | Mark books Available / Reserved / Sold, or delete them |
+| **Chats** (`#/chats`, `#/chat/<id>`) | In-app chat between buyer and seller, live updates, unread dot, phone numbers hidden for safety |
+| **Meetups** (in chat) | Suggest a busy public place and time with an optional map pin; "I'm here" shares your location once, with Google Maps directions |
+| **Near me** (Browse) | Sorts books by distance; sellers can add an approximate location (rounded to about 1 km) |
 | **How it works** (`#/how`) | Buying, selling, fees and FAQs |
 
 Buyers never see the seller's phone number. A buy request is saved in the database with an order number (e.g. `GS-7K2QX`), and the buyer sends it to you on WhatsApp. You confirm, collect payment by M-Pesa, and pay the seller 90% once the buyer has the book.
@@ -26,6 +29,7 @@ assets/style.css     GradeSwap brand styles (Montserrat, navy, amber, coral)
 assets/app.js        the app: pages, search, sign-in, listings, buy requests
 config.js            your Supabase keys, WhatsApp number and seller share
 supabase/schema.sql  database tables, security rules and photo storage
+supabase/002_chat_meetups.sql  chat, meetups and approximate locations
 favicon.svg          app icon
 ```
 
@@ -37,7 +41,7 @@ No build step and no packages to install: it's plain HTML, CSS and JavaScript.
 
 1. Go to **supabase.com** → **Start your project** → sign in with GitHub.
 2. **New project**: name it `gradeswap`, set a database password (save it), region **closest to Kenya** (e.g. Frankfurt or Cape Town if offered).
-3. When it's ready, open **SQL Editor → New query**, paste everything from `supabase/schema.sql`, and click **Run**.
+3. When it's ready, open **SQL Editor → New query**, paste everything from `supabase/schema.sql`, and click **Run**. Then do the same with `supabase/002_chat_meetups.sql`.
 4. Open **Project Settings → API Keys**. Copy the **Project URL** and the **publishable** key (or legacy **anon public** key) into `config.js`. Never use the secret / service_role key on the website.
 
 ### 2. Turn on Google sign-in
