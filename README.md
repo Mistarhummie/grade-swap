@@ -38,7 +38,7 @@ No build step and no packages to install: it's plain HTML, CSS and JavaScript.
 1. Go to **supabase.com** → **Start your project** → sign in with GitHub.
 2. **New project**: name it `gradeswap`, set a database password (save it), region **closest to Kenya** (e.g. Frankfurt or Cape Town if offered).
 3. When it's ready, open **SQL Editor → New query**, paste everything from `supabase/schema.sql`, and click **Run**.
-4. Open **Project Settings → API**. Copy the **Project URL** and the **anon public** key into `config.js`.
+4. Open **Project Settings → API Keys**. Copy the **Project URL** and the **publishable** key (or legacy **anon public** key) into `config.js`. Never use the secret / service_role key on the website.
 
 ### 2. Turn on Google sign-in
 

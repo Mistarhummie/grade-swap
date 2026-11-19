@@ -85,7 +85,15 @@ create or replace view public.orders_admin with (security_invoker = true) as
   left join public.seller_contacts c on c.user_id = l.seller_id;
 revoke all on public.orders_admin from anon, authenticated;
 
--- 4. Photo storage: public to view, sellers upload only into their own folder
+-- 4. Table access for the website (newer Supabase projects don't grant this automatically).
+-- Row-level security above still decides which rows each visitor can touch.
+grant usage on schema public to anon, authenticated;
+grant select on public.listings to anon, authenticated;
+grant insert, update, delete on public.listings to authenticated;
+grant select, insert, update on public.seller_contacts to authenticated;
+grant insert on public.orders to anon, authenticated;
+
+-- 5. Photo storage: public to view, sellers upload only into their own folder
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('listing-photos', 'listing-photos', true, 3145728, array['image/jpeg', 'image/png', 'image/webp'])
 on conflict (id) do nothing;
