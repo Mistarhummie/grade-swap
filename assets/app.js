@@ -3,7 +3,7 @@
 "use strict";
 
 const cfg = window.GRADESWAP_CONFIG || {};
-const LIVE = !!(cfg.SUPABASE_URL && !cfg.SUPABASE_URL.startsWith("YOUR") && window.supabase);
+const LIVE = !!(cfg.SUPABASE_URL && !cfg.SUPABASE_URL.startsWith("YOUR") && cfg.SUPABASE_ANON_KEY && !cfg.SUPABASE_ANON_KEY.startsWith("YOUR") && window.supabase);
 const sb = LIVE ? window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, { auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true } }) : null;
 const SELLER_SHARE = cfg.SELLER_SHARE || 0.9;
 const BUCKET = "listing-photos";
